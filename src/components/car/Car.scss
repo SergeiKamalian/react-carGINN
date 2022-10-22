@@ -1,0 +1,60 @@
+.Car {
+    width: 80px;
+    height: 127px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-self: flex-end;
+    // margin-bottom: 210px;
+    transition: all .5s ease;
+    // animation: carAnim 1s linear;
+
+    >.kovsh {
+        width: 100%;
+        height: 40px;
+        background-image: url('../../images/kovsh.png');
+        background-size: cover;
+        position: relative;
+        top: 16px;
+        z-index: 5;
+    }
+
+    >.wehicle {
+        width: 100%;
+        height: 88px;
+        background-image: url('../../images/car.png');
+        background-size: cover;
+        position: relative;
+        left: 4px;
+        z-index: 6;
+    }
+}
+
+@keyframes carAnim {
+    0% {
+       left: 0px;
+    }
+    10% {
+        transform: rotate(20deg);
+    }
+    90% {
+        transform: rotate(0deg);
+    }
+    100% {
+        left: 155px;
+    }
+}
+@keyframes carAnim2 {
+    0% {
+        left: 155px;
+    }
+    10% {
+        transform: rotate(-20deg);
+    }
+    90% {
+        transform: rotate(0deg);
+    }
+    100% {
+        left: 0;
+    }
+}
