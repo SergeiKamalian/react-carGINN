@@ -8,3 +8,7 @@ export const setActiveBonuse = (activeBonuse: IActiveBonuse | null) => ({
 	type: GAME_TYPES.SET_ACTIVE_BONUSE,
 	payload: activeBonuse
 })
+export const setWin = (win: boolean | null) => ({
+	type: GAME_TYPES.SET_ACTIVE_BONUSE,
+	payload: win
+})

@@ -9,10 +9,11 @@ const bonuses: IBonuse[] = [
 const INITIAL_STATE: IReducerInitialState = {
     position: 'left',
     bonuses: bonuses,
-    activeBonuse: null
+    activeBonuse: null,
+    win: null
 };
 
-const gameReducer = (state = INITIAL_STATE, action: { type: string; payload: string | IActiveBonuse }) => {
+const gameReducer = (state = INITIAL_STATE, action: { type: string; payload: string | IActiveBonuse | boolean }) => {
     switch (action.type) {
         case GAME_TYPES.SET_POSITION:
             return {
@@ -23,6 +24,11 @@ const gameReducer = (state = INITIAL_STATE, action: { type: string; payload: str
             return {
                 ...state,
                 activeBonuse: action.payload as IActiveBonuse,
+            };
+        case GAME_TYPES.SET_WIN:
+            return {
+                ...state,
+                win: action.payload as boolean,
             };
         default:
             return state;
