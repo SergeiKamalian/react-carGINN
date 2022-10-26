@@ -1,10 +1,11 @@
 .GamePage {
     width: 100%;
-    height: calc(100vh - 48px);
+    height: 100%;
     overflow: hidden;
     display: flex;
     justify-content: center;
     background: #b8b1c8;
+    margin-bottom: 48px;
 
     >.sectionCar {
         width: 54%;
@@ -13,6 +14,7 @@
         bottom: 200px;
         margin: 0 auto;
         display: flex;
+        border: 1px solid red;
     }
 
     >.gameRoad {
@@ -27,25 +29,26 @@
         align-items: center;
         padding: 0 60px 0 100px;
         position: relative;
-        animation: topAnim 100s linear infinite;
+        // animation: topAnim 100s linear infinite;
         transform: translateY(-98%);
         border: 1px solid white;
     }
 
     >.bonuses {
         width: 70%;
-        height: 100vh;
+        height: 100%;
         position: absolute;
         display: flex;
         justify-content: space-between;
         flex-direction: row;
         bottom: 10%;
         z-index: 0;
-        animation: bonuseAnim 2.114s linear infinite;
+
+        // animation: bonuseAnim 2.114s linear infinite;
         // background: purple;
         >.bonuse_option {
             width: 48%;
-            height:  calc(100vh - 48px);
+            height: calc(100vh - 48px);
             // border: 1px solid white;
             display: flex;
             justify-content: center;
@@ -76,11 +79,12 @@
 
     >.gamePanels {
         width: 100%;
-        height: calc(100vh - 48px);
+        height: calc(100% - 48px);
         position: absolute;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        // padding-bottom: 90px;
 
         >.topPanel {
             width: 100%;
@@ -148,7 +152,8 @@
             background-size: cover;
             display: flex;
             justify-content: center;
-            align-items: center;
+            // align-items: center;
+            padding-top: 60px;
 
             >.wheel {
                 width: 159px;
@@ -158,6 +163,46 @@
                 position: relative;
                 top: 10px;
             }
+        }
+    }
+
+    >.counterInStart {
+        width: 100%;
+        height: calc(100% - 234px);
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 900;
+
+        >span {
+            font-size: 70px;
+            animation: counterSpan 1.2s linear infinite;
+            color: #cd3513;
+            text-shadow: 0 0 5px rgba($color: black, $alpha: .5);
+        }
+    }
+
+    >.gameEnd {
+        width: 100%;
+        height: calc(100% - 234px);
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 900;
+        align-items: center;
+
+        >span {
+            font-size: 70px;
+            align-items: center;
+            animation: loseSpan .6s linear;
+            color: #cd3513;
+            text-shadow: 0 0 5px rgba($color: black, $alpha: .5);
         }
     }
 }
@@ -202,9 +247,42 @@
 
 @keyframes bonuseAnim {
     0% {
-        transform: translateY(-370px);
+        transform: translateY(-450px);
     }
+
     100% {
-        transform: translateY(370px);
+        transform: translateY(450px);
+    }
+}
+
+@keyframes counterSpan {
+    0% {
+        opacity: 0;
+    }
+
+    30% {
+        opacity: 0;
+        transform: scale(.8);
+    }
+
+    90% {
+        opacity: 1;
+        transform: scale(1.8);
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes loseSpan {
+    0% {
+        opacity: 0;
+        transform: scale(.5);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
     }
 }

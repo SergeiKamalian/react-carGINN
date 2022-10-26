@@ -10,8 +10,8 @@ function App() {
       <Routes>
         <Route path='' element={<StartMenu />} />
         <Route path='game' element={<GamePage />} />
+        
       </Routes>
-
     </div>
   );
 }

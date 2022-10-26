@@ -1,6 +1,6 @@
 import { IActiveBonuse } from "../../model/model"
 import { GAME_TYPES } from "./game/gameTypes"
-export const setCarPosition = (position: string) => ({
+export const setCarPosition = (position: string | null) => ({
 	type: GAME_TYPES.SET_POSITION,
 	payload: position
 })
@@ -11,4 +11,16 @@ export const setActiveBonuse = (activeBonuse: IActiveBonuse | null) => ({
 export const setWin = (win: boolean | null) => ({
 	type: GAME_TYPES.SET_ACTIVE_BONUSE,
 	payload: win
+})
+export const setFuelCount = (count: number) => ({
+	type: GAME_TYPES.SET_FUEL_COUNT,
+	payload: count
+})
+export const setCrystalCount = (count: number) => ({
+	type: GAME_TYPES.SET_CRYSTAL_COUNT,
+	payload: count
+})
+export const setGameStart = (bool: boolean) => ({
+	type: GAME_TYPES.SET_GAME_START,
+	payload: bool
 })

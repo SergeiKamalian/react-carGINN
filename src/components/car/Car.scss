@@ -8,6 +8,7 @@
     // margin-bottom: 210px;
     transition: all .5s ease;
     // animation: carAnim 1s linear;
+    border: 1px solid white;
 
     >.kovsh {
         width: 100%;
@@ -32,7 +33,7 @@
 
 @keyframes carAnim {
     0% {
-       left: 0px;
+        justify-content: flex-start
     }
     10% {
         transform: rotate(20deg);
@@ -41,12 +42,12 @@
         transform: rotate(0deg);
     }
     100% {
-        left: 155px;
+        justify-content: flex-end
     }
 }
 @keyframes carAnim2 {
     0% {
-        left: 155px;
+        justify-content: flex-start
     }
     10% {
         transform: rotate(-20deg);
@@ -55,6 +56,6 @@
         transform: rotate(0deg);
     }
     100% {
-        left: 0;
+        justify-content: flex-end
     }
 }

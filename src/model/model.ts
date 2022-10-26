@@ -11,6 +11,9 @@ export interface IReducerInitialState {
     bonuses: IBonuse[],
     activeBonuse: null | IActiveBonuse
     win: boolean | null
+    fuel: number
+    crystal: number
+    gameStart: boolean
 }
 export interface IAnimations {
     wheelToRight: IAnimation
