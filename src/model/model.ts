@@ -11,8 +11,6 @@ export interface IReducerInitialState {
     bonuses: IBonuse[],
     activeBonuse: null | IActiveBonuse
     win: boolean | null
-    fuel: number
-    crystal: number
     gameStart: boolean
 }
 export interface IAnimations {
@@ -20,5 +18,16 @@ export interface IAnimations {
     wheelToLeft: IAnimation
 }
 export interface IAnimation {
-animation: string
+    animation: string
+}
+export interface IUserReducerInitialState {
+    fuel: number
+    crystal: number
+    ratingUser: string | null
+}
+
+export interface IGinnInformation {
+    ratingUser: string | null
+    fuel: number
+    crystal: number
 }

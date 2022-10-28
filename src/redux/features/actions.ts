@@ -1,5 +1,6 @@
 import { IActiveBonuse } from "../../model/model"
 import { GAME_TYPES } from "./game/gameTypes"
+import { USER_TYPES } from "./user/userTypes"
 export const setCarPosition = (position: string | null) => ({
 	type: GAME_TYPES.SET_POSITION,
 	payload: position
@@ -23,4 +24,8 @@ export const setCrystalCount = (count: number) => ({
 export const setGameStart = (bool: boolean) => ({
 	type: GAME_TYPES.SET_GAME_START,
 	payload: bool
+})
+export const setUserRating = (rating: string | null) => ({
+	type: USER_TYPES.SET_USER_RATING,
+	payload: rating
 })

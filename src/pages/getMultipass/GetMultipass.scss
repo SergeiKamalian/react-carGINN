@@ -1,0 +1,94 @@
+.multipassPage {
+    width: 100%;
+    height: calc(100% - 48px);
+    background: #eff5ff;
+    display: flex;
+
+    >.bottomPanel {
+        width: 100%;
+        height: calc(100vw / (375px / 234px));
+        background-image: url('../../images/panel-noGame.png');
+        background-size: cover;
+        place-self: flex-end;
+        position: absolute;
+        z-index: 50;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding-top: 10px;
+
+        >.buttons {
+            display: flex;
+            flex-direction: row;
+            gap: 9px;
+
+            >button {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+
+                width: 156px;
+                height: 63px;
+                border-radius: 12px;
+                border: none;
+                outline: none;
+                font-family: 'Montserrat';
+                font-style: normal;
+                font-weight: 600;
+                font-size: 28px;
+                line-height: 40px;
+                text-align: center;
+                color: #FFFFFF;
+
+            }
+
+            >.notNow {
+                background: #9BADCA;
+            }
+
+            >.go {
+                background: #E857D1;
+            }
+        }
+    }
+
+    >.watchInfo {
+        width: 80%;
+        margin: 50px auto;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        >img {
+            width: 117px;
+        }
+
+        >.getMultipass {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 900;
+            font-size: 48px;
+            line-height: 58px;
+            text-align: center;
+            color: #0A0522;
+            margin-top: 22px;
+        }
+
+        >.multipassSubtitle {
+            font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 28px;
+            text-align: center;
+            background: linear-gradient(81.66deg, #271B64 0%, #0A0522 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-top: 12px;
+        }
+    }
+}

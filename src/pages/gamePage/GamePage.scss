@@ -14,7 +14,6 @@
         bottom: 200px;
         margin: 0 auto;
         display: flex;
-        border: 1px solid red;
     }
 
     >.gameRoad {
@@ -31,7 +30,6 @@
         position: relative;
         // animation: topAnim 100s linear infinite;
         transform: translateY(-98%);
-        border: 1px solid white;
     }
 
     >.bonuses {
@@ -79,7 +77,8 @@
 
     >.gamePanels {
         width: 100%;
-        height: calc(100% - 48px);
+
+        height: calc(100% - 43px);
         position: absolute;
         display: flex;
         flex-direction: column;

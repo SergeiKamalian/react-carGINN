@@ -12,8 +12,6 @@ const INITIAL_STATE: IReducerInitialState = {
     bonuses: bonuses,
     activeBonuse: null,
     win: null,
-    fuel: 0,
-    crystal: 0
 };
 
 const gameReducer = (state = INITIAL_STATE, action: { type: string; payload: string | IActiveBonuse | boolean | number }) => {
@@ -32,16 +30,6 @@ const gameReducer = (state = INITIAL_STATE, action: { type: string; payload: str
             return {
                 ...state,
                 win: action.payload as boolean,
-            };
-        case GAME_TYPES.SET_CRYSTAL_COUNT:
-            return {
-                ...state,
-                crystal: action.payload as number,
-            };
-        case GAME_TYPES.SET_FUEL_COUNT:
-            return {
-                ...state,
-                fuel: action.payload as number,
             };
         case GAME_TYPES.SET_GAME_START:
             return {

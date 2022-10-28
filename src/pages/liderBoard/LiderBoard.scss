@@ -1,0 +1,156 @@
+.liderBoard {
+    width: 100%;
+    height: calc(100% - 48px);
+    background: #eff5ff;
+    display: flex;
+
+    >.bottomPanel {
+        width: 100%;
+        height: calc(100vw / (375px / 234px));
+        background-image: url('../../images/panel-noGame.png');
+        background-size: cover;
+        place-self: flex-end;
+        position: absolute;
+        z-index: 50;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 10px;
+
+        >.fuels {
+            display: flex;
+            gap: 3px;
+            flex-direction: row;
+            margin-bottom: 25px;
+
+            >img {
+                width: 22px;
+            }
+        }
+    }
+
+    >.lidersInfo {
+        width: 80%;
+        margin: 50px auto;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        >.board {
+            width: 100%;
+            height: 400px;
+            margin-top: 20px;
+            overflow-y: scroll;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+
+            >.boardItem {
+                width: 100%;
+                height: 44px;
+                background: #FFFFFF;
+                border-radius: 12px;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                padding: 8px 18px 8px 12px;
+                gap: 9px;
+
+                >.numberGamer {
+                    width: 15px;
+                    height: 28px;
+                    font-family: 'Montserrat';
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 18px;
+                    line-height: 28px;
+                    text-align: center;
+                    color: #9BADCA;
+                }
+
+                >.nameGamer,
+                >.countCrystal {
+                    width: 230px;
+                    height: 28px;
+                    font-family: 'Montserrat';
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 18px;
+                    line-height: 28px;
+                    color: #0A0522;
+                }
+
+                >.countCrystal {
+                    width: 10px;
+                }
+            }
+
+            >.activeBoardItem {
+                background: linear-gradient(244.05deg, #FEBF0E 16.37%, #FFDB29 83.63%);
+
+                >.active {
+                    color: white;
+                }
+            }
+        }
+
+        >span {
+            font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 28px;
+            line-height: 40px;
+            color: #0A0522;
+        }
+
+        >div {
+            >span {
+                font-family: 'Inter';
+                font-style: normal;
+                font-weight: 900;
+                font-size: 48px;
+                line-height: 58px;
+                color: #0A0522;
+            }
+
+            >img {
+                width: 37px;
+                margin-left: 3px;
+            }
+        }
+
+        >.lidersNav {
+            width: 100%;
+            margin-top: 25px;
+
+            >ul {
+                display: flex;
+                width: 100%;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                list-style: none;
+
+                >li {
+                    font-family: 'Montserrat';
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 18px;
+                    line-height: 28px;
+                    text-align: center;
+                    color: #9BADCA;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    gap: 2px;
+                }
+
+                >.active {
+                    color: #0A0522;
+                }
+            }
+        }
+    }
+}

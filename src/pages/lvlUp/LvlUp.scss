@@ -1,0 +1,126 @@
+.LvlUp {
+    width: 100%;
+    height: calc(100vh - 48px);
+    background: #eff5ff;
+    display: flex;
+    // justify-content: space-between;
+    // align-items: center;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+
+    >.lvlUp_information {
+        width: 314px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+
+        >.topInfo {
+            display: flex;
+            flex-direction: column;
+
+            >.lvlupSpan {
+                font-family: 'Inter';
+                font-style: normal;
+                font-weight: 900;
+                font-size: 48px;
+                line-height: 58px;
+                text-align: center;
+                color: #0A0522;
+            }
+
+            >.info {
+                font-family: 'Montserrat';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 18px;
+                line-height: 28px;
+                text-align: center;
+                background: linear-gradient(81.66deg, #271B64 0%, #0A0522 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+        }
+
+        >.imgInfo {
+            width: 314px;
+            height: 314px;
+            background-size: cover;
+            position: relative;
+            top: 70px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            margin-top: 50px;
+        }
+
+        >.ratingInfo {
+            width: 251px;
+            height: 65px;
+            border: none;
+            outline: none;
+            background: #2D9858;
+            border-radius: 12px;
+            font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 36px;
+            line-height: 48px;
+            text-align: center;
+            color: #FFFFFF;
+            position: relative;
+            bottom: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+    >.bottom_panel {
+        width: 100%;
+        height: 234px;
+        background-image: url('../../images/panel-noGame.png');
+        background-size: cover;
+        align-self: flex-end;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        z-index: 15;
+
+        >.share {
+            border: none;
+            outline: none;
+            width: 254px;
+            height: 63px;
+            background: #E857D1;
+            border-radius: 12px;
+            font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 28px;
+            line-height: 40px;
+            color: white;
+            text-align: center;
+        }
+
+        >.notnow {
+            width: 174px;
+            height: 63px;
+            background: #9BADCA;
+            border-radius: 12px;
+            border: none;
+            outline: none;
+            font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 28px;
+            line-height: 40px;
+            color: white;
+        }
+    }
+}

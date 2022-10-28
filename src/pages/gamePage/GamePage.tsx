@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from "react-redux"
-import { setActiveBonuse, setCarPosition, setCrystalCount, setFuelCount, setGameStart, setWin } from "../../redux/features/actions"
+import { setActiveBonuse, setCarPosition, setCrystalCount, setFuelCount, setGameStart, setUserRating, setWin } from "../../redux/features/actions"
 import { RootState } from "../../redux/store"
 import { useEffect, useState, useRef, useMemo, useCallback } from 'react'
 import { getRandomBonuse } from "../../functions/functions"
-import { IActiveBonuse, IAnimations, IBonuse } from "../../model/model"
+import { IActiveBonuse, IAnimations, IBonuse, IGinnInformation } from "../../model/model"
+import { useNavigate } from "react-router-dom"
 const animations: IAnimations = {
     wheelToRight: { animation: 'wheelRight .5s linear' },
     wheelToLeft: { animation: 'wheelLeft .5s linear' },
@@ -13,43 +14,37 @@ const positionAnimations = {
     left: { animation: 'carAnim2 .3s linear', left: '0px' }
 }
 const GamePage = () => {
-    const [duration, setDuration] = useState(90)
-    const [bonuseDuration, setBonuseDuration] = useState(1346 / (34050 / duration))
     const [newBonus, setNewBonus] = useState<IActiveBonuse | null>(null)
-    const [winState, setWinState] = useState<boolean | null>(null)
     const [animateCar, setAnimateCar] = useState(true)
     const [countStart, setCountStart] = useState(3)
     const [newGame, setNewGame] = useState(true)
+    const [prevRating, setPrevRating] = useState('')
 
     const { position } = useSelector((state: RootState) => state.gameReducer)
     const { bonuses } = useSelector((state: RootState) => state.gameReducer)
     const { activeBonuse } = useSelector((state: RootState) => state.gameReducer)
-    const { crystal } = useSelector((state: RootState) => state.gameReducer)
-    const { fuel } = useSelector((state: RootState) => state.gameReducer)
     const { gameStart } = useSelector((state: RootState) => state.gameReducer)
+
+    const { crystal } = useSelector((state: RootState) => state.userReducer)
+    const { fuel } = useSelector((state: RootState) => state.userReducer)
+    const { ratingUser } = useSelector((state: RootState) => state.userReducer)
 
     const bonusesRef = useRef<HTMLDivElement>(null)
     const carRef = useRef<HTMLDivElement>(null)
-    const bonuseReachRef = useRef<NodeJS.Timeout>();
-
-    useEffect(() => {
-        setBonuseDuration(720 / (34050 / duration))
-    }, [duration])
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    // изменение первоначального рейтинга
+
+    useEffect(() => {
+        ratingUser && setPrevRating(ratingUser)
+    }, [])
 
     // логика выиграша или поражения
 
     const [bonuseReach, setBonuseReach] = useState(false)
     const [positionBonuse, setPositionBonuse] = useState(0)
-
-    useEffect(() => {
-        let positionCar = carRef.current!.getBoundingClientRect()!.top
-        positionCar = positionCar - 127
-        setInterval(() => {
-            const positionBonusNew = bonusesRef.current?.getBoundingClientRect().top
-        }, 4)
-    }, [bonuses])
 
     useEffect(() => {
         setInterval(() => {
@@ -75,7 +70,16 @@ const GamePage = () => {
                 setNewBonus(null)
             } else {
                 dispatch(setGameStart(false))
-                console.log('ПРОИГРЫШ')
+                setTimeout(() => {
+                    if (prevRating !== ratingUser) {
+                        navigate('/lvlUp')
+                    }else {
+                        ratingUser === 'Learner' && navigate('/lider-board')
+                        ratingUser === 'Novice' && navigate('/watch-the-fuel')
+                        ratingUser === 'Driver' && navigate('/get-multipass')
+                        ratingUser === 'Racer' && navigate('/ahead-token')
+                    }
+                }, 1000);
             }
         }
     }, [activeBonuse?.position, position])
@@ -93,12 +97,50 @@ const GamePage = () => {
         }
     }
 
-    // ///////////////////////////////
+
+    // изменение рейтиига
+    // const changeRating = useCallback(() => {
+    //     if (crystal <= 50 && crystal >= 0) {
+    //         dispatch(setUserRating('Learner'))
+    //     } else if (crystal > 50 && crystal <= 75) {
+    //         dispatch(setUserRating('Novice'))
+    //     } else if (crystal > 76 && crystal < 100) {
+    //         dispatch(setUserRating('Driver'))
+    //     } else if (crystal >= 100) {
+    //         dispatch(setUserRating('Racer'))
+    //     }
+    // }, [crystal])
+
+    const changeRating = useCallback(() => {
+        if (crystal <= 5 && crystal >= 0) {
+            dispatch(setUserRating('Learner'))
+        } else if (crystal > 5 && crystal <= 8) {
+            dispatch(setUserRating('Novice'))
+        } else if (crystal > 9 && crystal < 12) {
+            dispatch(setUserRating('Driver'))
+        } else if (crystal >= 12) {
+            dispatch(setUserRating('Racer'))
+        }
+    }, [crystal])
 
     useEffect(() => {
-        // console.log('bonuse')
-        // console.log(bonuseReach);
-    }, [bonuseReach])
+        changeRating()
+    }, [crystal])
+
+
+    // изменение в локалсторидж
+    const changeLocalStorageInfo = useCallback(() => {
+        const information: IGinnInformation = {
+            ratingUser,
+            fuel,
+            crystal
+        }
+        localStorage.setItem('ginn_information', JSON.stringify(information))
+    }, [crystal, fuel, ratingUser])
+
+    useEffect(() => {
+        changeLocalStorageInfo()
+    }, [crystal, fuel, ratingUser])
 
     // перемещение машины
     const changePosition = (positionNew: string) => {
@@ -134,13 +176,13 @@ const GamePage = () => {
         setInterval(() => {
             const positionBonusNew = bonusesRef.current?.getBoundingClientRect().top
             if (positionBonusNew && (positionBonusNew >= -390 && positionBonusNew <= -350)) {
-                setNewBonus(changeActiveBonuse(getRandomBonuse(bonuses)));
+                setNewBonus(changeActiveBonuse(getRandomBonuse(bonuses, fuel)));
             }
             else if (positionBonusNew && (positionBonusNew >= 300 && positionBonusNew <= 350)) {
                 setNewBonus(null)
             }
         }, 100)
-    }, [bonuses])
+    }, [])
 
     // обновление бонуса
     useEffect(() => {
@@ -195,10 +237,10 @@ const GamePage = () => {
                         <span>{crystal}</span>
                         <img src={require('../../images/crystal.png')} alt="crystalPhoto" className="crystal" />
                     </div>
-                    <div className="fuelPanel">
+                    {ratingUser && ratingUser !== 'Learner' && <div className="fuelPanel">
                         <img src={require('../../images/fuel-count.png')} alt="fuelPhoto" className="fuel" />
                         <span>x{fuel}</span>
-                    </div>
+                    </div>}
                 </div>
                 <div className="bottomPanel">
                     <div className="wheel" style={position !== null ? (position === 'right' ? animations.wheelToRight : animations.wheelToLeft) : {}}></div>
