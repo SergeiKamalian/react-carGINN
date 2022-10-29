@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
-import { setActiveBonuse, setCarPosition, setCrystalCount, setFuelCount, setGameStart, setUserRating, setWin } from "../../redux/features/actions"
+import { setActiveBonuse, setCarPosition, setCrystalCount, setFuelCount, setGameStart, setUserRating } from "../../redux/features/actions"
 import { RootState } from "../../redux/store"
-import { useEffect, useState, useRef, useMemo, useCallback } from 'react'
+import { useEffect, useState, useRef, useCallback } from 'react'
 import { getRandomBonuse } from "../../functions/functions"
 import { IActiveBonuse, IAnimations, IBonuse, IGinnInformation } from "../../model/model"
 import { useNavigate } from "react-router-dom"
@@ -39,7 +39,7 @@ const GamePage = () => {
 
     useEffect(() => {
         ratingUser && setPrevRating(ratingUser)
-    }, [])
+    }, [ratingUser])
 
     // логика выиграша или поражения
 
@@ -61,7 +61,7 @@ const GamePage = () => {
                 setBonuseReach(false)
             }, 1000);
         }
-    }, [positionBonuse])
+    }, [positionBonuse, bonuseReach])
 
     const winOrLose = useCallback(() => {
         if (position === activeBonuse?.position && activeBonuse) {
@@ -73,7 +73,7 @@ const GamePage = () => {
                 setTimeout(() => {
                     if (prevRating !== ratingUser) {
                         navigate('/lvlUp')
-                    }else {
+                    } else {
                         ratingUser === 'Learner' && navigate('/lider-board')
                         ratingUser === 'Novice' && navigate('/watch-the-fuel')
                         ratingUser === 'Driver' && navigate('/get-multipass')
@@ -82,7 +82,7 @@ const GamePage = () => {
                 }, 1000);
             }
         }
-    }, [activeBonuse?.position, position])
+    }, [activeBonuse?.position, position,activeBonuse, dispatch, navigate, prevRating, ratingUser])
 
     const userWin = () => {
         switch (activeBonuse?.activeBonuse?.value) {
@@ -99,26 +99,14 @@ const GamePage = () => {
 
 
     // изменение рейтиига
-    // const changeRating = useCallback(() => {
-    //     if (crystal <= 50 && crystal >= 0) {
-    //         dispatch(setUserRating('Learner'))
-    //     } else if (crystal > 50 && crystal <= 75) {
-    //         dispatch(setUserRating('Novice'))
-    //     } else if (crystal > 76 && crystal < 100) {
-    //         dispatch(setUserRating('Driver'))
-    //     } else if (crystal >= 100) {
-    //         dispatch(setUserRating('Racer'))
-    //     }
-    // }, [crystal])
-
     const changeRating = useCallback(() => {
-        if (crystal <= 5 && crystal >= 0) {
+        if (crystal <= 50 && crystal >= 0) {
             dispatch(setUserRating('Learner'))
-        } else if (crystal > 5 && crystal <= 8) {
+        } else if (crystal > 50 && crystal <= 75) {
             dispatch(setUserRating('Novice'))
-        } else if (crystal > 9 && crystal < 12) {
+        } else if (crystal > 76 && crystal < 100) {
             dispatch(setUserRating('Driver'))
-        } else if (crystal >= 12) {
+        } else if (crystal >= 100) {
             dispatch(setUserRating('Racer'))
         }
     }, [crystal])
@@ -147,7 +135,6 @@ const GamePage = () => {
         if (position !== null && animateCar && position !== positionNew) {
             dispatch(setCarPosition(null))
             setAnimateCar(false)
-            console.log(animateCar);
             dispatch(setCarPosition(positionNew))
         }
     }
@@ -182,7 +169,7 @@ const GamePage = () => {
                 setNewBonus(null)
             }
         }, 100)
-    }, [])
+    }, [bonuses, fuel])
 
     // обновление бонуса
     useEffect(() => {
@@ -203,7 +190,7 @@ const GamePage = () => {
             dispatch(setGameStart(true))
             setNewGame(false)
         }
-    }, [countStart])
+    }, [countStart, dispatch, newGame])
 
     return (
         <div className='GamePage'>
@@ -217,13 +204,14 @@ const GamePage = () => {
 
             <div className="bonuses"
                 style={gameStart ? { animation: 'bonuseAnim 2.3s linear infinite' } : { top: `${positionBonuse}px` }} ref={bonusesRef}>
-                <div className="left bonuse_option">
+                <div className="bonuse_option">
+
                     {activeBonuse?.position === 'left'
                         && activeBonuse.activeBonuse
                         && <img src={require(`../../images/${activeBonuse?.activeBonuse.value}.png`)}
                             alt={activeBonuse?.activeBonuse.value}></img>}
                 </div>
-                <div className="right bonuse_option">
+                <div className="bonuse_option">
                     {activeBonuse?.position === 'right'
                         && activeBonuse.activeBonuse
                         && <img src={require(`../../images/${activeBonuse?.activeBonuse.value}.png`)}

@@ -83,14 +83,15 @@
                 }
 
                 >.countCrystal {
-                    width: 10px;
+                    width: 30px;
+                    text-align: center;
                 }
             }
 
             >.activeBoardItem {
                 background: linear-gradient(244.05deg, #FEBF0E 16.37%, #FFDB29 83.63%);
 
-                >.active {
+                >.numberGamer {
                     color: white;
                 }
             }

@@ -31,3 +31,8 @@ export interface IGinnInformation {
     fuel: number
     crystal: number
 }
+export interface ILeader {
+    name: string
+    rating: number
+    id: number
+}

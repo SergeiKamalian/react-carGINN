@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { setFuelCount } from "../../redux/features/actions"
 import { RootState } from "../../redux/store"
 
-const WatchPage = () => {
+const NoFuel = () => {
   const [fuels, setFuels] = useState<string[]>([])
   const [noFuels, setNoFuels] = useState<string[]>([])
 
@@ -35,7 +35,7 @@ const WatchPage = () => {
   }, [fuel])
 
   return (
-    <div className='watchPage'>
+    <div className='NoFuel'>
 
       <div className="bottomPanel">
         <div className="fuels">
@@ -46,18 +46,17 @@ const WatchPage = () => {
             <img src={require('../../images/nofuel-count.png')} alt="" key={Math.random()} />
           ))}
         </div>
-        <img src={require('../../images/start_btn.png')} className="button"
-          onClick={handleClick}
-        />
+        <button onClick={handleClick}>Refuel in the chat!</button>
       </div>
 
       <div className="watchInfo">
-        <img src={require('../../images/fuelBIg.png')} alt="fuel" />
-        <span className="watchTitle">Watch the fuel!</span>
-        <span className="watchSubtitle">Now the fuel may run out!</span>
+        <img src={require('../../images/fuel-zero.png')} alt="fuel" />
+        <span className="watchTitle">fuel is out</span>
+        <span className="watchSubtitle">Invite your friends to play with you to get refueling. <br /> 
+        <b>1 new friend — 1 canister of fuel.</b></span>
       </div>
     </div>
   )
 }
 
-export default WatchPage
+export default NoFuel

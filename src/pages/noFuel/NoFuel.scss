@@ -1,4 +1,4 @@
-.watchPage {
+.NoFuel {
     width: 100%;
     height: calc(100% - 48px);
     background: #eff5ff;
@@ -26,6 +26,23 @@
             >img {
                 width: 22px;
             }
+        }
+
+        >button {
+            border: none;
+            outline: none;
+            width: 312px;
+            height: 63px;
+            background: #E857D1;
+            border-radius: 12px;
+            font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 28px;
+            line-height: 40px;
+            color: white;
+            text-align: center;
+            margin-top: 30px;
         }
     }
 

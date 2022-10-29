@@ -4,11 +4,12 @@ import { useNavigate } from "react-router-dom"
 import { setFuelCount } from "../../redux/features/actions"
 import { RootState } from "../../redux/store"
 
-const WatchPage = () => {
+const PlusFuel = () => {
   const [fuels, setFuels] = useState<string[]>([])
   const [noFuels, setNoFuels] = useState<string[]>([])
 
   const { fuel } = useSelector((state: RootState) => state.userReducer)
+  const { ratingUser } = useSelector((state: RootState) => state.userReducer)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -27,15 +28,11 @@ const WatchPage = () => {
   }, [])
 
   const handleClick = useCallback(() => {
-    if (fuel < 5) {
-      console.log('система просмотра видео и отправки на таблицу')
-      dispatch(setFuelCount(fuel + 1))
-    }
-    navigate('/plus-fuel')
+    navigate('/lider-board')
   }, [fuel])
-
+  
   return (
-    <div className='watchPage'>
+    <div className='plusFuel'>
 
       <div className="bottomPanel">
         <div className="fuels">
@@ -46,18 +43,16 @@ const WatchPage = () => {
             <img src={require('../../images/nofuel-count.png')} alt="" key={Math.random()} />
           ))}
         </div>
-        <img src={require('../../images/start_btn.png')} className="button"
-          onClick={handleClick}
-        />
+        <button onClick={handleClick}>Good</button>
       </div>
 
       <div className="watchInfo">
         <img src={require('../../images/fuelBIg.png')} alt="fuel" />
-        <span className="watchTitle">Watch the fuel!</span>
-        <span className="watchSubtitle">Now the fuel may run out!</span>
+        <span className="watchTitle">+1 canister of fuel</span>
+        <span className="watchSubtitle">More races per race</span>
       </div>
     </div>
   )
 }
 
-export default WatchPage
+export default PlusFuel

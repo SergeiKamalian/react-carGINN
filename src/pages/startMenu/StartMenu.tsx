@@ -1,12 +1,16 @@
 import { useNavigate } from "react-router-dom"
 import { useCallback, useEffect } from 'react'
 import { IGinnInformation } from "../../model/model"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { setCrystalCount, setFuelCount, setUserRating } from "../../redux/features/actions"
+import { RootState } from "../../redux/store"
 
 const StartMenu = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+
+  const { ratingUser } = useSelector((state: RootState) => state.userReducer)
+  const { fuel } = useSelector((state: RootState) => state.userReducer)
 
   // получение информации от localStorage
   const getInfoFromLocalStorage = useCallback(() => {
@@ -24,6 +28,17 @@ const StartMenu = () => {
     getInfoFromLocalStorage()
   }, [])
 
+  // начало игры
+  const startGame = useCallback(() => {
+    console.log(ratingUser)
+    console.log(fuel)
+    if (ratingUser === 'Learner' || !ratingUser) navigate('/game')
+    else {
+      if (fuel > 0) navigate('/game')
+      else navigate('/no-fuel')
+    }
+  }, [])
+
   return (
     <div className="startMenu">
       <div className="startMenu_bg">
@@ -33,7 +48,7 @@ const StartMenu = () => {
         </div>
         <div className="racer_image"></div>
         <div className="startMenu_panel center">
-          <div className="startGame_btn" onClick={() => navigate('game')}></div>
+          <div className="startGame_btn" onClick={startGame}></div>
         </div>
       </div>
     </div>
