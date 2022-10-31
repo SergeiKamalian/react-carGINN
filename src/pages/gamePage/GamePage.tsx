@@ -14,6 +14,15 @@ const positionAnimations = {
     left: { animation: 'carAnim2 .3s linear', left: '0px' }
 }
 const GamePage = () => {
+
+    const [bonuseDuration, setBonuseDuration] = useState(0);
+
+    useEffect(() => {
+        const vh = window.innerHeight
+        setBonuseDuration((100 * 900) / (15000 - (2 * vh)) / 2.1)
+        console.log(bonuseDuration)
+    }, [bonuseDuration, setBonuseDuration])
+
     const [newBonus, setNewBonus] = useState<IActiveBonuse | null>(null)
     const [animateCar, setAnimateCar] = useState(true)
     const [countStart, setCountStart] = useState(3)
@@ -54,7 +63,7 @@ const GamePage = () => {
     }, [bonuses])
 
     useEffect(() => {
-        if (positionBonuse && (positionBonuse >= 125 && positionBonuse <= 135) && bonuseReach === false) {
+        if (positionBonuse && (positionBonuse >= 0 && positionBonuse <= 20) && bonuseReach === false) {
             winOrLose()
             setBonuseReach(true)
             setTimeout(() => {
@@ -82,7 +91,7 @@ const GamePage = () => {
                 }, 1000);
             }
         }
-    }, [activeBonuse?.position, position,activeBonuse, dispatch, navigate, prevRating, ratingUser])
+    }, [activeBonuse?.position, position, activeBonuse, dispatch, navigate, prevRating, ratingUser])
 
     const userWin = () => {
         switch (activeBonuse?.activeBonuse?.value) {
@@ -203,7 +212,7 @@ const GamePage = () => {
             </div>
 
             <div className="bonuses"
-                style={gameStart ? { animation: 'bonuseAnim 2.3s linear infinite' } : { top: `${positionBonuse}px` }} ref={bonusesRef}>
+                style={gameStart ? { animation: `bonuseAnim ${bonuseDuration}s linear infinite` } : { top: `${positionBonuse}px` }} ref={bonusesRef}>
                 <div className="bonuse_option">
 
                     {activeBonuse?.position === 'left'
